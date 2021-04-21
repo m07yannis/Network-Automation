@@ -1,0 +1,243 @@
+
+#hosts file yml witin Ansible folder to be configured
+
+
+#Local host rendering (This is the one i used for junos network automation)
+#[local]
+#127.0.0.1 ansible_connection=local
+#localhost ansible_connection=local
+
+#junos rendering
+[junos]
+junOS1
+junOS2
+R2
+
+ROLES/ROUTER/TASKS FOLDER
+
+---
+- name: Generate configuration files
+  template: src=junos1.j2 dest=/etc/ansible/JUNOS/{{item.hostname}}.txt
+  with_items: "{{ junos1_template }}"
+
+- name: Generate configuration files
+  template: src=junos2.j2 dest=/etc/ansible/JUNOS/{{item.hostname}}.txt
+  with_items: "{{ junos2_template }}"
+
+- name: Generate configuration files
+  template: src=cisco.j2 dest=/etc/ansible/JUNOS/{{item.hostname}}.txt
+  with_items: "{{ cisco_template }}"
+
+
+ROLES/ROUTER/TEMPLATES FOLDER
+
+#cisco.j2 template
+
+configure terminal
+{% for interface in cisco_loopback %}
+interface {{interface.name}}
+ip address {{interface.address}} {{interface.mask}}
+{% endfor %}
+ 
+router bgp {{item.as}}
+{% for neighbor in cisco_neighbors %}
+neighbor {{neighbor.id}} remote-as {{neighbor.as}}
+{% endfor %}
+{% for loopback in cisco_loopback %}
+network {{loopback.network}} mask {{loopback.mask}}
+{% endfor %}
+
+#junos1.j2 template
+
+configure
+set protocols bgp group external-peers type external
+set routing-options autonomous-system {{item.as}}
+{% for neighbor in junos1_neighbors %}
+set protocols bgp group external-peers neighbor {{neighbor.id}} peer-as {{neighbor.as}}
+{% endfor %}
+{% for loopback in junos1_loopback %}
+set interface lo0 unit 0 family inet address {{loopback.address}}
+set policy-options prefix-list Loopback {{loopback.network}}
+{% endfor %}
+set policy-options policy-statement ebgp term 1 from prefix-list Loopback
+set policy-options policy-statement ebgp term 1 then accept
+set protocols bgp group external-peers export ebgp
+commit
+
+#junos2.j2 template
+
+configure
+set protocols bgp group external-peers type external
+set routing-options autonomous-system {{item.as}}
+{% for neighbor in junos2_neighbors %}
+set protocols bgp group external-peers neighbor {{neighbor.id}} peer-as {{neighbor.as}}
+{% endfor %}
+{% for loopback in junos2_loopback %}
+set interface lo0 unit 0 family inet address {{loopback.address}}
+set policy-options prefix-list Loopback {{loopback.network}}
+{% endfor %}
+set policy-options policy-statement ebgp term 1 from prefix-list Loopback
+set policy-options policy-statement ebgp term 1 then accept
+set protocols bgp group external-peers export ebgp
+commit
+
+ROLES/ROUTER/VARS FOLDER
+
+#main.yml file
+
+---
+cisco_template:
+- { hostname: cisco_template, as: 10 }
+ 
+cisco_loopback:
+- { name: lo0, address: 1.1.1.1, network: 1.1.1.0, mask: 255.255.255.0 }
+- { name: lo1, address: 11.11.11.11, network: 11.11.11.0, mask: 255.255.255.0 }
+ 
+cisco_neighbors:
+- { id: 192.168.3.2, as: 30 }
+- { id: 192.168.2.2, as: 20 }
+
+---------------------------------------------------------------------
+ 
+junos1_template:
+- { hostname: junos1_template, as: 20 }
+ 
+junos1_loopback:
+- { name: 1, address: 2.2.2.2/24, network: 2.2.2.0/24 }
+- { name: 2, address: 22.22.22.22/24, network: 22.22.22.0/24 }
+ 
+junos1_neighbors:
+- { id: 192.168.2.1, as: 10 }
+- { id: 192.168.4.2, as: 30 }
+---------------------------------------------------------------------
+
+junos2_template:
+- { hostname: junos2_template, as: 30 }
+ 
+junos2_loopback:
+- { name: 1, address: 3.3.3.3/24, network: 3.3.3.0/24 }
+- { name: 2, address: 33.33.33.33/24, network: 33.33.33.0/24 }
+ 
+junos2_neighbors:
+- { id: 192.168.3.1, as: 10 }
+- { id: 192.168.4.1, as: 20 }
+
+-------------------------------------------------------
+configs.cfg file to be configured as follow (location: /etc/ansible)
+
+[defaults]
+interpreter_python = auto_silent
+gather_timeout = 0
+stdout_callback = yaml
+connection = smart
+timeout = 60
+deprecation_warnings = False
+host_key_checking = False
+retry_files_enabled = False
+inventory = /etc/ansible/hosts
+
+THE PLAYBOOK YML FILES (3 playbooks)
+
+junos_netconf.yml Playbook
+---------------------------------------------------------
+---
+- name: Ansible Network Automation Playbook
+  hosts: [junos]
+  gather_facts: No
+
+  tasks:
+
+  - name: turn on netconf for juniper devices
+    vars:
+      ansible_connection: network_cli
+    junos_netconf:
+
+
+devices.yml Main playbook to generate configuration files
+-------------------------------------------------------- 
+---  
+- name: Generate Router Configuration Files
+  hosts: [junos]  
+  
+  roles:
+   - router
+--------------------------------------------------------
+facts.yml file
+
+---
+- name: Ansible Facts
+  hosts: junOS1
+  gather_facts: True
+
+  tasks:
+
+  - name: print facts to console
+    debug:
+      msg: "{{ansible_facts}}"
+--------------------------------------------------------
+TEMPLATE NETWORK CONFIGURATION
+
+R2 (Cisco 7200): AS 10
+        Fa 0/0-192.168.1.1/24
+        Fa 0/1-192.168.2.1/24
+        Fa 1/0-192.168.3.1/24
+Ubuntu: Eth0-192.168.1.2/24
+
+JunOS1: Ethernet1-192.168.2.2/24
+        Ethernet0-192.168.4.1/24
+
+JunOS2: Ethernet1-192.168.3.2/24
+        Ethernet0-192.168.4.2/24
+--------------------------------------------------------
+UBUNTU IP ADDRESS CONFIGURATION-LOCATION /ETC/NETWORK, file ..interfaces.. to be edited
+auto enp0s3
+iface enp0s3 inet static
+address 192.168.1.2
+netmask 255.255.255.0
+gateway 192.168.1.1
+
+
+-------------------------------------------------------------
+
+Python script for cisco ios R2
+
+>>> import netmiko
+>>> from netmiko import ConnectHandler
+>>> connection = netmiko.ConnectHandler(ip="192.168.1.1", device_type="cisco_ios", 
+                                        username="cisco", password="cisco123")
+
+print(connection.send_command("show ip int brief"))
+
+connection.disconnect()
+
+-------------------------------------------------------------
+Python script for Junos1 and Junos2 devices
+
+#!/usr/bin/env python
+
+# Filename:                     netmiko.py
+# Command to run the program:   python netmiko.py
+
+from netmiko import ConnectHandler
+
+# Establish a connection to the router
+junos1 = {
+	'device_type': 'juniper',
+	'host':   '192.168.2.2',
+	'username': 'root',
+	'password': 'juniper123',
+	'port' : 22,
+}
+
+junos2 = {
+	'device_type': 'juniper',
+	'host':   '192.168.3.2',
+	'username': 'root',
+	'password': 'juniper123',
+	'port' : 22,
+}
+net_connect = ConnectHandler(**junos1)
+net_connect = ConnectHandler(**junos2)
+
+
+
