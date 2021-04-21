@@ -2,11 +2,6 @@
 #hosts file yml witin Ansible folder to be configured
 
 
-#Local host rendering (This is the one i used for junos network automation)
-#[local]
-#127.0.0.1 ansible_connection=local
-#localhost ansible_connection=local
-
 #junos rendering
 [junos]
 junOS1
