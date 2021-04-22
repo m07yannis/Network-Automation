@@ -263,6 +263,54 @@ ipaddr_template = env.from_string('''
 # Render the template and print the results  
 render_1 = ipaddr_template.render(interfaces=interfaces)
 print(str(render_1))
+---------------------------------------------------------------------------------------
+
+#JUNOS configuration destination folder
+
+yannis@yannis-VirtualBox:/etc/ansible/JUNOS$ cat cisco_template.txt
+configure terminal
+interface lo0
+ip address 1.1.1.1 255.255.255.0
+interface lo1
+ip address 11.11.11.11 255.255.255.0
+
+router bgp 10
+neighbor 192.168.3.2 remote-as 30
+neighbor 192.168.2.2 remote-as 20
+
+network 1.1.1.0 mask 255.255.255.0
+network 11.11.11.0 mask 255.255.255.0
+---------------------------------------------------------------------------------------
+yannis@yannis-VirtualBox:/etc/ansible/JUNOS$ cat junos1_template.txt
+configure
+set protocols bgp group external-peers type external
+set routing-options autonomous-system 20
+set protocols bgp group external-peers neighbor 192.168.2.1 peer-as 10
+set protocols bgp group external-peers neighbor 192.168.4.2 peer-as 30
+set interface lo0 unit 0 family inet address 2.2.2.2/24
+set policy-options prefix-list Loopback 2.2.2.0/24
+set interface lo0 unit 0 family inet address 22.22.22.22/24
+set policy-options prefix-list Loopback 22.22.22.0/24
+set policy-options policy-statement ebgp term 1 from prefix-list Loopback
+set policy-options policy-statement ebgp term 1 then accept
+set protocols bgp group external-peers export ebgp
+commit
+---------------------------------------------------------------------------------------
+yannis@yannis-VirtualBox:/etc/ansible/JUNOS$ cat junos2_template.txt
+configure
+set protocols bgp group external-peers type external
+set routing-options autonomous-system 30
+set protocols bgp group external-peers neighbor 192.168.3.1 peer-as 10
+set protocols bgp group external-peers neighbor 192.168.4.1 peer-as 20
+set interface lo0 unit 0 family inet address 3.3.3.3/24
+set policy-options prefix-list Loopback 3.3.3.0/24
+set interface lo0 unit 0 family inet address 33.33.33.33/24
+set policy-options prefix-list Loopback 33.33.33.0/24
+set policy-options policy-statement ebgp term 1 from prefix-list Loopback
+set policy-options policy-statement ebgp term 1 then accept
+set protocols bgp group external-peers export ebgp
+commit
+
 
 
 
