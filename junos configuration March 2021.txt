@@ -135,6 +135,7 @@ THE PLAYBOOK YML FILES (3 playbooks)
 
 junos_netconf.yml Playbook
 ---------------------------------------------------------
+
 ---
 - name: Ansible Network Automation Playbook
   hosts: [junos]
@@ -233,6 +234,32 @@ junos2 = {
 }
 net_connect = ConnectHandler(**junos1)
 net_connect = ConnectHandler(**junos2)
+--------------------------------------------------------------
+#IP device config using jinja2 templates
+
+#junos1 templates config
+interfaces = [{'interface': 'em0', 'ip_address': '192.168.4.1'},
+              {'interface': 'em1', 'ip_address': '192.168.2.2'}]
+
+#junos2 templates config
+interfaces = [{'interface': 'em0', 'ip_address': '192.168.4.2'},
+              {'interface': 'em1', 'ip_address': '192.168.3.2'}]
+
+# R2 jinja2 templates config
+interfaces = [{'interface': 'FastEthernet 0/0', 'ip_address': '192.168.1.1'},
+              {'interface': 'FastEthernet 0/1', 'ip_address': '192.168.2.1'},
+              {'interface': 'FastEthernet 1/0', 'ip_address': '192.168.3.1'}]
+	   
+#Using for loops to create multiple IP addresses	  
+env = Environment(trim_blocks=True, lstrip_blocks=True)
+ipaddr_template = env.from_string('''
+{% for item in interfaces %}
+{{ item.interface }} has IP address {{ item.ip_address }}
+{% endfor %}''')
+
+# Render the template and print the results  
+render_1 = ipaddr_template.render(interfaces=interfaces)
+print(str(render_1))
 
 
 
