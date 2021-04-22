@@ -211,10 +211,11 @@ Python script for Junos1 and Junos2 devices
 
 #!/usr/bin/env python
 
-# Filename:                     netmiko.py
-# Command to run the program:   python netmiko.py
+# Filename:                     netmiko_script.py
+# Command to run the program:   netmiko_script.py
 
 from netmiko import ConnectHandler
+from getpass import getpass
 
 # Establish a connection to the router
 junos1 = {
