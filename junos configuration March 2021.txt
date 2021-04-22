@@ -1,5 +1,5 @@
 
-#hosts file yml witin Ansible folder to be configured
+#hosts file witin Ansible folder to be configured as following
 
 
 #junos rendering
@@ -7,6 +7,9 @@
 junOS1
 junOS2
 R2
+----------------------------------------------------------------------
+#Ansible folder structure config
+
 
 ROLES/ROUTER/TASKS FOLDER
 
@@ -22,7 +25,7 @@ ROLES/ROUTER/TASKS FOLDER
 - name: Generate configuration files
   template: src=cisco.j2 dest=/etc/ansible/JUNOS/{{item.hostname}}.txt
   with_items: "{{ cisco_template }}"
-
+-----------------------------------------------------------------------
 
 ROLES/ROUTER/TEMPLATES FOLDER
 
@@ -75,7 +78,7 @@ set policy-options policy-statement ebgp term 1 from prefix-list Loopback
 set policy-options policy-statement ebgp term 1 then accept
 set protocols bgp group external-peers export ebgp
 commit
-
+-----------------------------------------------------------------------
 ROLES/ROUTER/VARS FOLDER
 
 #main.yml file
@@ -130,11 +133,10 @@ deprecation_warnings = False
 host_key_checking = False
 retry_files_enabled = False
 inventory = /etc/ansible/hosts
-
+---------------------------------------------------------
 THE PLAYBOOK YML FILES (3 playbooks)
 
 junos_netconf.yml Playbook
----------------------------------------------------------
 
 ---
 - name: Ansible Network Automation Playbook
