@@ -238,7 +238,7 @@ junos2 = {
 net_connect = ConnectHandler(**junos1)
 net_connect = ConnectHandler(**junos2)
 --------------------------------------------------------------
-#IP device config using jinja2 templates
+#IP device config using jinja2 templates and python
 
 #junos1 templates config
 interfaces = [{'interface': 'em0', 'ip_address': '192.168.4.1'},
@@ -310,6 +310,10 @@ set policy-options policy-statement ebgp term 1 from prefix-list Loopback
 set policy-options policy-statement ebgp term 1 then accept
 set protocols bgp group external-peers export ebgp
 commit
+---------------------------------------------------------------------------------------
+
+
+
 
 
 
