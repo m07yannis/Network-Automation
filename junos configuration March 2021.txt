@@ -383,6 +383,10 @@ def api_delete():
 
 app.run(host='0.0.0.0')
 
+#to get a request for all routers use curl command
+
+curl http://Ubuntu:5000/api/v1/routers/all
+
 
 
 
