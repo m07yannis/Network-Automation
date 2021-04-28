@@ -338,7 +338,7 @@ switches = [
 # Return all routers
 @app.route('/api/v1/routers/all', methods=['GET'])
 def api_all():
-    return jsonify(switches)
+    return jsonify(routers)
 
 # Return one router by lookup
 @app.route('/api/v1/router', methods=['GET'])
