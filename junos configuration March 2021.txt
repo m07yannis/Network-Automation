@@ -318,7 +318,70 @@ set policy-options policy-statement ebgp term 1 then accept
 set protocols bgp group external-peers export ebgp
 commit
 ---------------------------------------------------------------------------------------
+#Syslog server-rest API configuration
 
+import flask
+from flask import request, jsonify
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+
+switches = [
+    {'name': "junos1",
+     'operating_system': 'Junos'},
+    {'name': "junos2",
+     'operating_system': 'Junos'},
+    {'name': "R2",
+     'operating_system': 'IOS'}
+]
+
+# Return all routers
+@app.route('/api/v1/routers/all', methods=['GET'])
+def api_all():
+    return jsonify(switches)
+
+# Return one router by lookup
+@app.route('/api/v1/router', methods=['GET'])
+def api_id():
+    if 'name' not in request.args:
+        return "Error: No name field provided. Please specify a name.\n" , 400
+
+    results = []
+    for router in routers:
+        if router['name'] == request.args['name']:
+            results.append(router)
+
+    if not results:
+        return "Error: router not found\n", 404
+
+    return jsonify(results)
+
+@app.route('/api/v1/routers', methods=['POST'])
+def api_create():
+
+    for router in routers:
+        if router['name'] == request.json.get('name'):
+            return "Error: router already in current list\n", 400
+    routers.append(request.json)
+    resp = jsonify(request.json)
+    resp.status_code = 201
+    return resp
+
+@app.route('/api/v1/routers', methods=['DELETE'])
+def api_delete():
+    if 'name' not in request.args:
+        return "Error: No name field provided. Please specify a name.\n"
+
+    for router in list(routers):
+        if router['name'] == request.args['name']:
+            routers.remove(router)
+            break
+    else:
+        return "Error: router not found in list\n", 404
+
+    return '', 204
+
+app.run(host='0.0.0.0')
 
 
 
