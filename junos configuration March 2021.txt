@@ -238,7 +238,11 @@ junos2 = {
 net_connect = ConnectHandler(**junos1)
 net_connect = ConnectHandler(**junos2)
 --------------------------------------------------------------
-#IP device config using jinja2 templates and python
+Ip device configuration using Python and jinja2 templates
+#start the Python interpreter and import Environment module from Jinja2 library.
+
+python
+from jinja2 import Environment
 
 #junos1 templates config
 interfaces = [{'interface': 'em0', 'ip_address': '192.168.4.1'},
@@ -252,17 +256,20 @@ interfaces = [{'interface': 'em0', 'ip_address': '192.168.4.2'},
 interfaces = [{'interface': 'FastEthernet 0/0', 'ip_address': '192.168.1.1'},
               {'interface': 'FastEthernet 0/1', 'ip_address': '192.168.2.1'},
               {'interface': 'FastEthernet 1/0', 'ip_address': '192.168.3.1'}]
-	   
-#Using for loops to create multiple IP addresses	  
+
+#create a template inside a string literal and pass this to the from_string function of our Environment instance
+
 env = Environment(trim_blocks=True, lstrip_blocks=True)
 ipaddr_template = env.from_string('''
 {% for item in interfaces %}
 {{ item.interface }} has IP address {{ item.ip_address }}
 {% endfor %}''')
 
-# Render the template and print the results  
+#render it, passing interfaces in as a parameter:
 render_1 = ipaddr_template.render(interfaces=interfaces)
 print(str(render_1))
+
+
 ---------------------------------------------------------------------------------------
 
 #JUNOS configuration destination folder
