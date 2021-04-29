@@ -317,8 +317,8 @@ set policy-options policy-statement ebgp term 1 from prefix-list Loopback
 set policy-options policy-statement ebgp term 1 then accept
 set protocols bgp group external-peers export ebgp
 commit
----------------------------------------------------------------------------------------
-#Syslog server-rest API configuration
+-------------------------------------------------------------------------------------
+#python script for rest API config
 
 import flask
 from flask import request, jsonify
