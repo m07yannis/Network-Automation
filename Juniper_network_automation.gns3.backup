@@ -1,0 +1,403 @@
+{
+    "auto_close": true,
+    "auto_open": false,
+    "auto_start": false,
+    "drawing_grid_size": 25,
+    "grid_size": 75,
+    "name": "Juniper_network_automation",
+    "project_id": "ae1cef9b-02d9-4c40-9143-a8b0d1fa0055",
+    "revision": 9,
+    "scene_height": 1000,
+    "scene_width": 2000,
+    "show_grid": false,
+    "show_interface_labels": true,
+    "show_layers": false,
+    "snap_to_grid": false,
+    "supplier": null,
+    "topology": {
+        "computes": [],
+        "drawings": [
+            {
+                "drawing_id": "44d7c07a-2b2c-42eb-a7ca-4aeaefd489a5",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg height=\"176\" width=\"282\"><text fill=\"#000000\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">R2 (Cisco 7200):\n               Fa 0/0-192.168.1.1/24\n               Fa 0/1-192.168.2.1/24\n               Fa 1/0-192.168.3.1/24\n\nUbuntu: Eth0-192.168.1.2/24\n\nAS: 10</text></svg>",
+                "x": -312,
+                "y": 120,
+                "z": 3
+            },
+            {
+                "drawing_id": "687c2892-0479-44ef-80d9-426e2f9b4fbf",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg height=\"113\" width=\"311\"><text fill=\"#000000\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">\nJunOS2: Ethernet1-192.168.3.2/24\n               Ethernet0-192.168.4.2/24\nAS: 30\n</text></svg>",
+                "x": 214,
+                "y": 225,
+                "z": 2
+            },
+            {
+                "drawing_id": "87bedc09-f443-444a-86b0-6403e2f489b0",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg height=\"29\" width=\"143\"><text fill=\"#0000ff\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">192.168.3.0/24</text></svg>",
+                "x": 73,
+                "y": 92,
+                "z": 2
+            },
+            {
+                "drawing_id": "c9b41a18-3acc-4451-b74e-d9a5f6ebd7d7",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg height=\"29\" width=\"143\"><text fill=\"#0000ff\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">192.168.1.0/24</text></svg>",
+                "x": -227,
+                "y": -97,
+                "z": 2
+            },
+            {
+                "drawing_id": "b0830d3a-2ada-4959-820f-e3fb72d62aad",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg height=\"29\" width=\"143\"><text fill=\"#0000ff\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">192.168.2.0/24</text></svg>",
+                "x": 79,
+                "y": -169,
+                "z": 2
+            },
+            {
+                "drawing_id": "b818bedb-791a-4e46-a689-af83ec82890b",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg height=\"29\" width=\"143\"><text fill=\"#0000ff\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">192.168.4.0/24</text></svg>",
+                "x": 399,
+                "y": -34,
+                "z": 2
+            },
+            {
+                "drawing_id": "187e018a-a044-452f-aaf9-4727112cfc76",
+                "locked": false,
+                "rotation": 0,
+                "svg": "<svg height=\"113\" width=\"311\"><text fill=\"#000000\" fill-opacity=\"1.0\" font-family=\"TypeWriter\" font-size=\"10.0\" font-weight=\"bold\">\nJunOS1: Ethernet1-192.168.2.2/24\n               Ethernet0-192.168.4.1/24\nAS: 20\n</text></svg>",
+                "x": 203,
+                "y": -374,
+                "z": 2
+            }
+        ],
+        "links": [
+            {
+                "filters": {},
+                "link_id": "63372f7a-d41e-482a-82ea-1d86c614c1b1",
+                "nodes": [
+                    {
+                        "adapter_number": 0,
+                        "label": {
+                            "rotation": 0,
+                            "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                            "text": "e0",
+                            "x": 72,
+                            "y": 28
+                        },
+                        "node_id": "f1d79cba-ed0a-4c2f-a433-3cfb7b7a7534",
+                        "port_number": 0
+                    },
+                    {
+                        "adapter_number": 0,
+                        "label": {
+                            "rotation": 0,
+                            "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                            "text": "f0/0",
+                            "x": -33,
+                            "y": 35
+                        },
+                        "node_id": "4a45767c-86c8-4b1a-bea0-069b57749f8e",
+                        "port_number": 0
+                    }
+                ],
+                "suspend": false
+            },
+            {
+                "filters": {},
+                "link_id": "8e69248f-7168-452f-935b-59f2908c19ef",
+                "nodes": [
+                    {
+                        "adapter_number": 0,
+                        "label": {
+                            "rotation": 0,
+                            "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                            "text": "f0/1",
+                            "x": 60,
+                            "y": -52
+                        },
+                        "node_id": "4a45767c-86c8-4b1a-bea0-069b57749f8e",
+                        "port_number": 1
+                    },
+                    {
+                        "adapter_number": 1,
+                        "label": {
+                            "rotation": 0,
+                            "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                            "text": "e1",
+                            "x": -39,
+                            "y": 8
+                        },
+                        "node_id": "ed3827e2-6684-4090-9cdb-bca595ac9c43",
+                        "port_number": 0
+                    }
+                ],
+                "suspend": false
+            },
+            {
+                "filters": {},
+                "link_id": "d772dc14-54d9-4819-95dd-7e36314ccf5b",
+                "nodes": [
+                    {
+                        "adapter_number": 0,
+                        "label": {
+                            "rotation": 0,
+                            "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                            "text": "e0",
+                            "x": 44,
+                            "y": 49
+                        },
+                        "node_id": "ed3827e2-6684-4090-9cdb-bca595ac9c43",
+                        "port_number": 0
+                    },
+                    {
+                        "adapter_number": 0,
+                        "label": {
+                            "rotation": 0,
+                            "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                            "text": "e0",
+                            "x": 43,
+                            "y": -41
+                        },
+                        "node_id": "34c5b1f0-788e-4401-927b-d9958900712d",
+                        "port_number": 0
+                    }
+                ],
+                "suspend": false
+            },
+            {
+                "filters": {},
+                "link_id": "6b018284-b414-40ca-b78e-c7b2307ba298",
+                "nodes": [
+                    {
+                        "adapter_number": 1,
+                        "label": {
+                            "rotation": 0,
+                            "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                            "text": "f1/0",
+                            "x": 46,
+                            "y": 65
+                        },
+                        "node_id": "4a45767c-86c8-4b1a-bea0-069b57749f8e",
+                        "port_number": 0
+                    },
+                    {
+                        "adapter_number": 1,
+                        "label": {
+                            "rotation": 0,
+                            "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                            "text": "e1",
+                            "x": -42,
+                            "y": -2
+                        },
+                        "node_id": "34c5b1f0-788e-4401-927b-d9958900712d",
+                        "port_number": 0
+                    }
+                ],
+                "suspend": false
+            }
+        ],
+        "nodes": [
+            {
+                "compute_id": "local",
+                "console": 5002,
+                "console_auto_start": false,
+                "console_type": "telnet",
+                "custom_adapters": [],
+                "first_port_name": "",
+                "height": 59,
+                "label": {
+                    "rotation": 0,
+                    "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                    "text": "Ubuntu-1",
+                    "x": -12,
+                    "y": -25
+                },
+                "locked": false,
+                "name": "Ubuntu-1",
+                "node_id": "f1d79cba-ed0a-4c2f-a433-3cfb7b7a7534",
+                "node_type": "virtualbox",
+                "port_name_format": "Ethernet{0}",
+                "port_segment_size": 0,
+                "properties": {
+                    "adapter_type": "Intel PRO/1000 MT Desktop (82540EM)",
+                    "adapters": 1,
+                    "headless": false,
+                    "linked_clone": false,
+                    "on_close": "power_off",
+                    "ram": 1533,
+                    "usage": "",
+                    "use_any_adapter": true,
+                    "vmname": "Ubuntu"
+                },
+                "symbol": "linux_guest.svg",
+                "template_id": "c4868e37-543f-48cf-8791-1207a42d70ff",
+                "width": 65,
+                "x": -374,
+                "y": -61,
+                "z": 1
+            },
+            {
+                "compute_id": "vm",
+                "console": 5000,
+                "console_auto_start": false,
+                "console_type": "telnet",
+                "custom_adapters": [],
+                "first_port_name": null,
+                "height": 45,
+                "label": {
+                    "rotation": 0,
+                    "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                    "text": "R2",
+                    "x": 19,
+                    "y": -33
+                },
+                "locked": false,
+                "name": "R2",
+                "node_id": "4a45767c-86c8-4b1a-bea0-069b57749f8e",
+                "node_type": "dynamips",
+                "port_name_format": "Ethernet{0}",
+                "port_segment_size": 0,
+                "properties": {
+                    "auto_delete_disks": false,
+                    "aux": null,
+                    "clock_divisor": 4,
+                    "disk0": 0,
+                    "disk1": 0,
+                    "dynamips_id": 1,
+                    "exec_area": 64,
+                    "idlemax": 500,
+                    "idlepc": "0x606df838",
+                    "idlesleep": 30,
+                    "image": "c7200-adventerprisek9-mz.124-24.T5.image",
+                    "image_md5sum": "6b89d0d804e1f2bb5b8bda66b5692047",
+                    "mac_addr": "ca01.0c6f.0000",
+                    "midplane": "vxr",
+                    "mmap": true,
+                    "npe": "npe-400",
+                    "nvram": 512,
+                    "platform": "c7200",
+                    "power_supplies": [
+                        1,
+                        1
+                    ],
+                    "ram": 512,
+                    "sensors": [
+                        22,
+                        22,
+                        22,
+                        22
+                    ],
+                    "slot0": "C7200-IO-2FE",
+                    "slot1": "PA-2FE-TX",
+                    "slot2": "PA-FE-TX",
+                    "slot3": "PA-GE",
+                    "slot4": null,
+                    "slot5": null,
+                    "slot6": null,
+                    "sparsemem": true,
+                    "system_id": "FTX0945W0MY",
+                    "usage": ""
+                },
+                "symbol": ":/symbols/router.svg",
+                "template_id": "40d9e740-eb45-48cb-b2bb-e521ff83f1fe",
+                "width": 66,
+                "x": 15,
+                "y": -55,
+                "z": 1
+            },
+            {
+                "compute_id": "local",
+                "console": 5001,
+                "console_auto_start": false,
+                "console_type": "telnet",
+                "custom_adapters": [],
+                "first_port_name": "",
+                "height": 45,
+                "label": {
+                    "rotation": 0,
+                    "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                    "text": "JunOS1-2",
+                    "x": -13,
+                    "y": -32
+                },
+                "locked": false,
+                "name": "JunOS1-2",
+                "node_id": "ed3827e2-6684-4090-9cdb-bca595ac9c43",
+                "node_type": "virtualbox",
+                "port_name_format": "Ethernet{0}",
+                "port_segment_size": 0,
+                "properties": {
+                    "adapter_type": "Intel PRO/1000 MT Desktop (82540EM)",
+                    "adapters": 4,
+                    "headless": false,
+                    "linked_clone": false,
+                    "on_close": "power_off",
+                    "ram": 512,
+                    "usage": "",
+                    "use_any_adapter": true,
+                    "vmname": "JunOS1"
+                },
+                "symbol": ":/symbols/classic/router_firewall.svg",
+                "template_id": "cfe7e833-00ef-4a2c-aef4-4a9a0bb89567",
+                "width": 66,
+                "x": 332,
+                "y": -239,
+                "z": 1
+            },
+            {
+                "compute_id": "local",
+                "console": 5003,
+                "console_auto_start": false,
+                "console_type": "telnet",
+                "custom_adapters": [],
+                "first_port_name": "",
+                "height": 45,
+                "label": {
+                    "rotation": 0,
+                    "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
+                    "text": "JunOS2-1",
+                    "x": -11,
+                    "y": 45
+                },
+                "locked": false,
+                "name": "JunOS2-1",
+                "node_id": "34c5b1f0-788e-4401-927b-d9958900712d",
+                "node_type": "virtualbox",
+                "port_name_format": "Ethernet{0}",
+                "port_segment_size": 0,
+                "properties": {
+                    "adapter_type": "Intel PRO/1000 MT Desktop (82540EM)",
+                    "adapters": 4,
+                    "headless": false,
+                    "linked_clone": false,
+                    "on_close": "power_off",
+                    "ram": 512,
+                    "usage": "",
+                    "use_any_adapter": true,
+                    "vmname": "JunOS2"
+                },
+                "symbol": ":/symbols/classic/router_firewall.svg",
+                "template_id": "e41262ef-8171-45a2-b7a9-a2a27c64b1e3",
+                "width": 66,
+                "x": 335,
+                "y": 164,
+                "z": 1
+            }
+        ]
+    },
+    "type": "topology",
+    "variables": null,
+    "version": "2.2.18",
+    "zoom": 100
+}
